@@ -15,20 +15,21 @@ function App() {
 
   return (
     <div className="weather">
-      
+      <div className="weather__filters">
         <Button text="All" onClick={() => setFilter('all')} />
         <Button text="Sunny" onClick={() => setFilter('sunny')} />
         <Button text="Cloudy" onClick={() => setFilter('cloudy')} />
         <Button text="Rainy" onClick={() => setFilter('rainy')} />
         <Button text="Windy" onClick={() => setFilter('windy')} />
+      </div>
 
-        <div className="weather__list">
-          {filteredCities.map((city: City) => (
-            <div key={city.id} className="weather__block">
-              <CityCard city={city} onClick={() => {}} />
-            </div>
-          ))}
-        </div>
+      <div className="weather__list">
+        {filteredCities.map((city: City) => (
+          <div key={city.id} className="weather__block">
+            <CityCard city={city} onClick={() => {}} />
+          </div>
+        ))}
+      </div>
     </div>
   )
 }

@@ -56,6 +56,46 @@ body {
   margin: 8px 0 28px;
 }
 
+.weather__filters {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 18px;
+}
+
+.weather button {
+  appearance: none;
+  border: 1px solid rgba(110, 231, 255, 0.35);
+  background: linear-gradient(135deg, rgba(110, 231, 255, 0.2), rgba(255, 179, 71, 0.2));
+  color: var(--text);
+  font-family: inherit;
+  font-weight: 600;
+  letter-spacing: 0.2px;
+  padding: 10px 16px;
+  border-radius: 999px;
+  margin: 0;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+  box-shadow: 0 10px 22px rgba(6, 10, 20, 0.35);
+}
+
+.weather button:hover {
+  transform: translateY(-2px);
+  border-color: rgba(255, 179, 71, 0.6);
+  background: linear-gradient(135deg, rgba(110, 231, 255, 0.3), rgba(255, 179, 71, 0.32));
+}
+
+.weather button:active {
+  transform: translateY(0);
+  box-shadow: 0 6px 16px rgba(6, 10, 20, 0.3);
+}
+
+.weather button:focus-visible {
+  outline: 2px solid rgba(110, 231, 255, 0.7);
+  outline-offset: 2px;
+}
+
 .weather__list {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
