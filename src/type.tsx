@@ -18,8 +18,8 @@ export type SortField = 'temp' | 'humidity' | 'wind'
 export type SortOrder = 'asc' | 'desc'
 
 export type Sort = {
-  field: SortField
-  order: SortOrder
+    field: SortField
+    order: SortOrder
 }
 
 export type SelectedCity = {
