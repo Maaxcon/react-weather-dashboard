@@ -25,3 +25,9 @@ export type Sort = {
 export type SelectedCity = {
     name:City | null
 }
+
+
+export type Props = {
+  city: City
+  onClick: (city: City) => void
+}
