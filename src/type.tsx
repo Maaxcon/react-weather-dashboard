@@ -31,3 +31,9 @@ export type Props = {
   city: City
   onClick: (city: City) => void
 }
+
+
+export type Button = {
+    text:string
+    onClick:() => void
+}
