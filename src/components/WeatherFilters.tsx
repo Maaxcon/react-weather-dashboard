@@ -17,22 +17,27 @@ const WeatherFilters = ({
       <Button
         text="All"
         onClick={() => onSetFilter("all")}
+        isActive={filter === "all"}
       />
       <Button
         text="Sunny"
         onClick={() => onSetFilter("sunny")}
+        isActive={filter === "sunny"}
       />
       <Button
         text="Cloudy"
         onClick={() => onSetFilter("cloudy")}
+        isActive={filter === "cloudy"}
       />
       <Button
         text="Rainy"
         onClick={() => onSetFilter("rainy")}
+        isActive={filter === "rainy"}
       />
       <Button
         text="Windy"
         onClick={() => onSetFilter("windy")}
+        isActive={filter === "windy"}
       />
 
       <Button

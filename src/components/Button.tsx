@@ -1,7 +1,14 @@
-import type {ButtonT} from "../type"
-function Button({text,onClick}: ButtonT){
+import type { ButtonT } from "../type"
+
+function Button({ text, onClick, isActive }: ButtonT) {
     return(
-        <button onClick={onClick}>{text}</button>
+        <button
+            onClick={onClick}
+            data-active={isActive ? "true" : undefined}
+            aria-pressed={isActive}
+        >
+            {text}
+        </button>
     )
 
 }

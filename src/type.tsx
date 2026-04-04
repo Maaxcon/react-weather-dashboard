@@ -1,4 +1,4 @@
-export type WeatherCondition = | "windy" | "cloudy "| "rainy" | "sunny"
+export type WeatherCondition = | "windy" | "cloudy" | "rainy" | "sunny"
 
 export type City = {
     id:number,
@@ -36,6 +36,7 @@ export type Props = {
 export type Button = {
     text:string
     onClick:() => void
+    isActive?: boolean
 }
 
 export type ButtonT = Button
