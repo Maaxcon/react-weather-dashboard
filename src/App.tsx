@@ -1,9 +1,9 @@
-import CityDetails from "./components/CityDetails"
 import { cities } from "./data/cities"
 import { APP_ACTIONS } from "./type"
 import { useWeatherState } from "./hooks/useWeatherState"
 import WeatherFilters from "./components/WeatherFilters"
 import CityList from "./components/CityList"
+import CityModal from "./components/CityModal"
 
 function App() {
 
@@ -50,31 +50,12 @@ function App() {
       />
 
       {state.selectedCity ? (
-        <div
-          className="weather__overlay"
-          onClick={() => dispatch({ type: APP_ACTIONS.SELECT_CITY, payload: null })}
-        >
-          <div
-            className="weather__modal"
-            onClick={(event) => event.stopPropagation()}
-          >
-            <div className="weather__modal-header">
-              <div>
-                <p className="weather__modal-label">Details</p>
-                <h2 className="weather__modal-title">{state.selectedCity.name}</h2>
-              </div>
-              <button
-                className="weather__modal-close"
-                onClick={() =>
-                  dispatch({ type: APP_ACTIONS.SELECT_CITY, payload: null })
-                }
-              >
-                Close
-              </button>
-            </div>
-            <CityDetails city={state.selectedCity} />
-          </div>
-        </div>
+        <CityModal
+          city={state.selectedCity}
+          onClose={() =>
+            dispatch({ type: APP_ACTIONS.SELECT_CITY, payload: null })
+          }
+        />
       ) : null}
     </div>
   )
