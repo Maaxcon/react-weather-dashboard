@@ -1,10 +1,9 @@
-import { CityCard } from "./components/CityCard"
 import CityDetails from "./components/CityDetails"
 import { cities } from "./data/cities"
-import type { City } from "./type"
 import { APP_ACTIONS } from "./type"
 import { useWeatherState } from "./hooks/useWeatherState"
 import WeatherFilters from "./components/WeatherFilters"
+import CityList from "./components/CityList"
 
 function App() {
 
@@ -43,18 +42,12 @@ function App() {
         }
       />
 
-      <div className="weather__list">
-        {sortedCities.map((city: City) => (
-          <div key={city.id} className="weather__block">
-            <CityCard
-              city={city}
-              onClick={(clickedCity) =>
-                dispatch({ type: APP_ACTIONS.SELECT_CITY, payload: clickedCity })
-              }
-            />
-          </div>
-        ))}
-      </div>
+      <CityList
+        cities={sortedCities}
+        onSelect={(clickedCity) =>
+          dispatch({ type: APP_ACTIONS.SELECT_CITY, payload: clickedCity })
+        }
+      />
 
       {state.selectedCity ? (
         <div
