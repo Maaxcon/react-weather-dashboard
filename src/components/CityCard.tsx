@@ -1,6 +1,7 @@
+import { memo } from "react"
 import type { Props } from "../type"
 
-export const CityCard = ({ city, onClick }: Props) => {
+const CityCard = ({ city, onClick }: Props) => {
   return (
     <div onClick={() => onClick(city)}>
       <h3>{city.name}</h3>
@@ -11,3 +12,7 @@ export const CityCard = ({ city, onClick }: Props) => {
     </div>
   )
 }
+
+const MemoizedCityCard = memo(CityCard)
+
+export { MemoizedCityCard as CityCard }

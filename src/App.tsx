@@ -1,5 +1,7 @@
+import { useCallback } from "react"
 import { cities } from "./data/cities"
 import { APP_ACTIONS } from "./type"
+import type { City } from "./type"
 import { useWeatherState } from "./hooks/useWeatherState"
 import WeatherFilters from "./components/WeatherFilters"
 import CityList from "./components/CityList"
@@ -26,9 +28,13 @@ function App() {
     }
   })
 
+  const handleSelectCity = useCallback((clickedCity: City) => {
+    dispatch({ type: APP_ACTIONS.SELECT_CITY, payload: clickedCity })
+  }, [dispatch])
 
-
-  
+  const handleCloseModal = useCallback(() => {
+    dispatch({ type: APP_ACTIONS.SELECT_CITY, payload: null })
+  }, [dispatch])
 
   return (
     <div className="weather">
@@ -44,17 +50,13 @@ function App() {
 
       <CityList
         cities={sortedCities}
-        onSelect={(clickedCity) =>
-          dispatch({ type: APP_ACTIONS.SELECT_CITY, payload: clickedCity })
-        }
+        onSelect={handleSelectCity}
       />
 
       {state.selectedCity ? (
         <CityModal
           city={state.selectedCity}
-          onClose={() =>
-            dispatch({ type: APP_ACTIONS.SELECT_CITY, payload: null })
-          }
+          onClose={handleCloseModal}
         />
       ) : null}
     </div>
