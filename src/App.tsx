@@ -1,37 +1,33 @@
-import { useState } from 'react'
+﻿import { useState } from 'react'
 import { CityCard } from "./components/CityCard"
+import CityDetails from './components/CityDetails'
 import { cities } from "./data/cities"
-import type { Filter,Sort,City } from "./type"
+import type { Filter, Sort, City } from "./type"
 import Button from './components/Button'
-function App() {
 
+function App() {
   const [filter, setFilter] = useState<Filter>('all')
-  const [sort,setSort] = useState<Sort>({
-    field:"temp",
-    order:"asc"
+  const [sort, setSort] = useState<Sort>({
+    field: "temp",
+    order: "asc"
   })
-  
+  const [selectedCity, setSelectedCity] = useState<City | null>(null)
 
   const filteredCities = cities.filter((city) => {
     if (filter === 'all') return true
     return city.condition === filter
   })
 
-  const sortedCities = [...filteredCities].sort((a,b) => {
+  const sortedCities = [...filteredCities].sort((a, b) => {
     const aValue = a[sort.field]
     const bValue = b[sort.field]
 
-    if(sort.order === "asc"){
+    if (sort.order === "asc") {
       return aValue - bValue
-    }
-    else{
+    } else {
       return bValue - aValue
     }
   })
-
-
-
-  
 
   return (
     <div className="weather">
@@ -42,21 +38,56 @@ function App() {
         <Button text="Rainy" onClick={() => setFilter('rainy')} />
         <Button text="Windy" onClick={() => setFilter('windy')} />
 
-        <Button text="Sort Temp" onClick={() =>
+        <Button
+          text="Sort Temp"
+          onClick={() =>
             setSort((prev) => ({
               ...prev,
               order: prev.order === 'asc' ? 'desc' : 'asc'
             }))
-        } />
+          }
+        />
       </div>
 
       <div className="weather__list">
         {sortedCities.map((city: City) => (
           <div key={city.id} className="weather__block">
-            <CityCard city={city} onClick={() => {}} />
+            <CityCard
+              city={city}
+              onClick={(clickedCity) =>
+                setSelectedCity((prev) =>
+                  prev?.id === clickedCity.id ? null : clickedCity
+                )
+              }
+            />
           </div>
         ))}
       </div>
+      {selectedCity ? (
+        <div
+          className="weather__overlay"
+          onClick={() => setSelectedCity(null)}
+        >
+          <div
+            className="weather__modal"
+            onClick={(event) => event.stopPropagation()}
+          >
+            <div className="weather__modal-header">
+              <div>
+                <p className="weather__modal-label">Details</p>
+                <h2 className="weather__modal-title">{selectedCity.name}</h2>
+              </div>
+              <button
+                className="weather__modal-close"
+                onClick={() => setSelectedCity(null)}
+              >
+                Close
+              </button>
+            </div>
+            <CityDetails city={selectedCity} />
+          </div>
+        </div>
+      ) : null}
     </div>
   )
 }

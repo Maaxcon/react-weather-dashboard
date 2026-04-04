@@ -37,3 +37,8 @@ export type Button = {
     text:string
     onClick:() => void
 }
+
+export type Detail = {
+    humidity:number,
+    wind:number,
+}
