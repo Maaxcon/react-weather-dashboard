@@ -172,6 +172,60 @@ body {
   animation-delay: 0.25s;
 }
 
+.weather__overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(8, 12, 22, 0.78);
+  backdrop-filter: blur(6px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 80px 20px;
+  z-index: 20;
+}
+
+.weather__modal {
+  width: min(520px, 92vw);
+  border-radius: 22px;
+  padding: 24px 24px 20px;
+  background: linear-gradient(160deg, var(--card), var(--card-2));
+  border: 1px solid rgba(110, 231, 255, 0.3);
+  box-shadow: 0 28px 70px rgba(5, 9, 18, 0.6);
+}
+
+.weather__modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 12px;
+}
+
+.weather__modal-label {
+  margin: 0;
+  font-size: 11px;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.weather__modal-title {
+  margin: 4px 0 0;
+  font-size: 28px;
+  font-weight: 600;
+}
+
+.weather__modal-close {
+  padding: 8px 14px;
+  font-size: 12px;
+}
+
+.weather__details {
+  display: grid;
+  gap: 8px;
+  color: var(--text);
+}
+
 @keyframes rise {
   from {
     opacity: 0;
@@ -194,5 +248,17 @@ body {
 
   .weather__block h4 {
     font-size: 22px;
+  }
+
+  .weather__overlay {
+    padding: 56px 16px;
+  }
+
+  .weather__modal {
+    padding: 20px 18px 18px;
+  }
+
+  .weather__modal-title {
+    font-size: 24px;
   }
 }

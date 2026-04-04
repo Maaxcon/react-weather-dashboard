@@ -37,3 +37,22 @@ export type Button = {
     text:string
     onClick:() => void
 }
+
+export type ButtonT = Button
+
+export const APP_ACTIONS = {
+    SET_FILTER: "set-filter",
+    TOGGLE_SORT_ORDER: "toggle-sort-order",
+    SELECT_CITY: "select-city",
+} as const
+
+export type AppAction =
+    | { type: typeof APP_ACTIONS.SET_FILTER, payload: Filter }
+    | { type: typeof APP_ACTIONS.TOGGLE_SORT_ORDER }
+    | { type: typeof APP_ACTIONS.SELECT_CITY, payload: City | null }
+
+export type AppState = {
+    filter: Filter,
+    sort: Sort,
+    selectedCity: City | null,
+}
