@@ -1,4 +1,4 @@
-import { useCallback } from "react"
+import { useCallback, useMemo } from "react"
 import { cities } from "./data/cities"
 import { APP_ACTIONS } from "./type"
 import type { City } from "./type"
@@ -11,22 +11,22 @@ function App() {
 
   const { state, dispatch } = useWeatherState()
 
-  const filteredCities = cities.filter((city) => {
-    if (state.filter === 'all') return true
-    return city.condition === state.filter
-  })
+  const filteredCities = useMemo(() => {
+    if (state.filter === "all") return cities
+    return cities.filter((city) => city.condition === state.filter)
+  }, [state.filter])
 
-  const sortedCities = [...filteredCities].sort((a,b) => {
-    const aValue = a[state.sort.field]
-    const bValue = b[state.sort.field]
+  const sortedCities = useMemo(() => {
+    return [...filteredCities].sort((a, b) => {
+      const aValue = a[state.sort.field]
+      const bValue = b[state.sort.field]
 
-    if(state.sort.order === "asc"){
-      return aValue - bValue
-    }
-    else{
+      if (state.sort.order === "asc") {
+        return aValue - bValue
+      }
       return bValue - aValue
-    }
-  })
+    })
+  }, [filteredCities, state.sort.field, state.sort.order])
 
   const handleSelectCity = useCallback((clickedCity: City) => {
     dispatch({ type: APP_ACTIONS.SELECT_CITY, payload: clickedCity })
