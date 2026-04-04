@@ -3,8 +3,8 @@ import CityDetails from "./components/CityDetails"
 import { cities } from "./data/cities"
 import type { City } from "./type"
 import { APP_ACTIONS } from "./type"
-import Button from './components/Button'
 import { useWeatherState } from "./hooks/useWeatherState"
+import WeatherFilters from "./components/WeatherFilters"
 
 function App() {
 
@@ -33,17 +33,15 @@ function App() {
 
   return (
     <div className="weather">
-      <div className="weather__filters">
-        <Button text="All" onClick={() => dispatch({ type: APP_ACTIONS.SET_FILTER, payload: 'all' })} />
-        <Button text="Sunny" onClick={() => dispatch({ type: APP_ACTIONS.SET_FILTER, payload: 'sunny' })} />
-        <Button text="Cloudy" onClick={() => dispatch({ type: APP_ACTIONS.SET_FILTER, payload: 'cloudy' })} />
-        <Button text="Rainy" onClick={() => dispatch({ type: APP_ACTIONS.SET_FILTER, payload: 'rainy' })} />
-        <Button text="Windy" onClick={() => dispatch({ type: APP_ACTIONS.SET_FILTER, payload: 'windy' })} />
-
-        <Button text="Sort Temp" onClick={() =>
+      <WeatherFilters
+        filter={state.filter}
+        onSetFilter={(filter) =>
+          dispatch({ type: APP_ACTIONS.SET_FILTER, payload: filter })
+        }
+        onToggleSort={() =>
           dispatch({ type: APP_ACTIONS.TOGGLE_SORT_ORDER })
-        } />
-      </div>
+        }
+      />
 
       <div className="weather__list">
         {sortedCities.map((city: City) => (
